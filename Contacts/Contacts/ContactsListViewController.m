@@ -9,6 +9,7 @@
 #import "ContactsListViewController.h"
 #import "Contacts.h"
 #import "AppDelegate.h"
+#import "DetailViewController.h"
 
 @implementation ContactsListViewController
 @synthesize searchBar;
@@ -16,6 +17,7 @@
 @synthesize managedObjectContext;
 @synthesize delegate;
 @synthesize searchedContacts;
+@synthesize contactName;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -67,6 +69,17 @@
         [alert show];
     }
     self.contacts = fetchResult;
+    
+    //for searching
+    [request setResultType:NSDictionaryResultType];
+    [request setPropertiesToFetch:[NSArray arrayWithObject:@"name"]];
+    NSMutableArray *forSearch = [[managedObjectContext executeFetchRequest:request error:&error] mutableCopy];
+    if (forSearch == nil) {
+        //some action
+    }
+    
+    self.contactName = [forSearch valueForKey:@"name"];
+    
     search = NO;
 }
 
@@ -125,9 +138,9 @@
     }
     
     if (search) {
-        Contacts *contact = [searchedContacts objectAtIndex:indexPath.row];
-        cell.textLabel.text = contact.name;
-        cell.detailTextLabel.text = contact.telphone.stringValue;
+        Contacts *result = [searchedContacts objectAtIndex:indexPath.row];
+        cell.textLabel.text = result.name;
+        cell.detailTextLabel.text = result.telphone.stringValue;
     }else{
         Contacts *contact = [contacts objectAtIndex:indexPath.row];
         cell.textLabel.text = contact.name;
@@ -136,45 +149,6 @@
     
     return cell;
 }
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -187,6 +161,14 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+//    DetailViewController *detailView = [[DetailViewController alloc] init];
+//    if (search) {
+//        NSLog(@"%@ dipilih",[searchedContacts objectAtIndex:indexPath.row]);
+//        detailView.contactData = [searchedContacts objectAtIndex:indexPath.row];
+//    }else{
+//        NSLog(@"%@ dipilih",[contacts objectAtIndex:indexPath.row]);
+//        detailView.contactData = [contacts objectAtIndex:indexPath.row];
+//    }
 }
 
 - (IBAction)goHome:(id)sender {
@@ -195,17 +177,36 @@
 
 #pragma mark - SearchBar delegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *managedContext = [appDelegate managedObjectContext];
-    NSEntityDescription *description = [NSEntityDescription entityForName:@"Contacts" inManagedObjectContext:managedContext];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:description];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(name = %@)",searchText];
-    [request setPredicate:predicate];
-    NSError *error;
-    NSArray *object = [managedContext executeFetchRequest:request error:&error];
-    if ([object count]==0) {
-        NSLog(@"Not Found %@",searchText);
+    [self.searchDisplayController searchResultsDataSource];
+    if (searchText.length > 0) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(name contains[c] %@)",searchText];
+        self.searchedContacts = [[self.contacts filteredArrayUsingPredicate:predicate] mutableCopy];
+        NSLog(@"%@",self.searchedContacts);
+        search = YES;
+    }else{
+        search = NO;
+    }
+    [[self.searchDisplayController searchResultsTableView] reloadData];
+}
+
+#pragma mark - prepare for segue method
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    DetailViewController *dvc = (DetailViewController *)[segue destinationViewController];
+    
+    dvc.manageObjectContext = managedObjectContext;
+    
+    if ([[segue identifier] isEqualToString:@"detailContact"])
+    {
+        NSInteger selectedIndex = [[self.tableView indexPathForSelectedRow] row];
+        if (search) {
+            dvc.contactData = [searchedContacts objectAtIndex:selectedIndex];
+            NSLog(@"ditap");
+        }else{
+            dvc.contactData = [contacts objectAtIndex:selectedIndex];
+            NSLog(@"ditekan");
+        }
     }
 }
 

@@ -23,6 +23,7 @@
 
 @property (nonatomic, strong) NSMutableArray* contacts;
 @property (nonatomic, strong) NSMutableArray* searchedContacts;
+@property (nonatomic, strong) NSMutableArray* contactName;
 @property (nonatomic, strong) NSManagedObjectContext* managedObjectContext;
 @property (nonatomic, weak) id<ContactListDelegate> delegate;
 - (IBAction)goHome:(id)sender;

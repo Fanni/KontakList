@@ -7,7 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Contacts.h"
 
 @interface DetailViewController : UITableViewController
+
+@property (nonatomic, strong) Contacts *contactData;
+@property (nonatomic, strong) NSManagedObjectContext *manageObjectContext;
+@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *numberLabel;
+@property (strong, nonatomic) IBOutlet UILabel *fbLabel;
+@property (strong, nonatomic) IBOutlet UILabel *emailLabel;
+@property (strong, nonatomic) IBOutlet UILabel *twitLabel;
 
 @end
