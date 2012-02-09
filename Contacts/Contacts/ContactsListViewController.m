@@ -81,6 +81,10 @@
     self.contactName = [forSearch valueForKey:@"name"];
     
     search = NO;
+    
+    [self.searchDisplayController setSearchResultsDelegate:self];
+    [self.searchDisplayController setSearchResultsDataSource:self];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -140,11 +144,11 @@
     if (search) {
         Contacts *result = [searchedContacts objectAtIndex:indexPath.row];
         cell.textLabel.text = result.name;
-        cell.detailTextLabel.text = result.telphone.stringValue;
+//        cell.detailTextLabel.text = result.telphone.stringValue;
     }else{
         Contacts *contact = [contacts objectAtIndex:indexPath.row];
         cell.textLabel.text = contact.name;
-        cell.detailTextLabel.text = contact.telphone.stringValue;
+//        cell.detailTextLabel.text = contact.telphone.stringValue;
     }
     
     return cell;
@@ -154,21 +158,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
-//    DetailViewController *detailView = [[DetailViewController alloc] init];
-//    if (search) {
-//        NSLog(@"%@ dipilih",[searchedContacts objectAtIndex:indexPath.row]);
-//        detailView.contactData = [searchedContacts objectAtIndex:indexPath.row];
-//    }else{
-//        NSLog(@"%@ dipilih",[contacts objectAtIndex:indexPath.row]);
-//        detailView.contactData = [contacts objectAtIndex:indexPath.row];
-//    }
+    [self performSegueWithIdentifier:@"detailContact" sender:self];
 }
 
 - (IBAction)goHome:(id)sender {
@@ -177,7 +167,7 @@
 
 #pragma mark - SearchBar delegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
-    [self.searchDisplayController searchResultsDataSource];
+    
     if (searchText.length > 0) {
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(name contains[c] %@)",searchText];
         self.searchedContacts = [[self.contacts filteredArrayUsingPredicate:predicate] mutableCopy];
@@ -193,12 +183,11 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
-    DetailViewController *dvc = (DetailViewController *)[segue destinationViewController];
-    
-    dvc.manageObjectContext = managedObjectContext;
-    
     if ([[segue identifier] isEqualToString:@"detailContact"])
     {
+        DetailViewController *dvc = [segue destinationViewController];
+        
+        dvc.manageObjectContext = managedObjectContext;
         NSInteger selectedIndex = [[self.tableView indexPathForSelectedRow] row];
         if (search) {
             dvc.contactData = [searchedContacts objectAtIndex:selectedIndex];

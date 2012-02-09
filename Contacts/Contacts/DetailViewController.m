@@ -61,9 +61,9 @@
     [super viewWillAppear:animated];
     
     self.nameLabel.text = contactData.name;
-    self.numberLabel.text = contactData.telphone.stringValue;
+//    self.numberLabel.text = contactData.telphone.stringValue;
     self.emailLabel.text = contactData.email;
-    self.fbLabel.text = contactData.facebook;
+//    self.fbLabel.text = contactData.facebook;
     self.twitLabel.text = contactData.twitter;
 }
 

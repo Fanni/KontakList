@@ -106,9 +106,9 @@
     NSLog(@"------------ %@",self.managedObjContext);
     Contacts *contactDB = (Contacts *)[NSEntityDescription insertNewObjectForEntityForName:@"Contacts" inManagedObjectContext:managedObjContext];
     [contactDB setName:self.nameText.text];
-    [contactDB setTelphone:[NSNumber numberWithInt:[self.telphoneText.text intValue]]];
+//    [contactDB setTelphone:[NSNumber numberWithInt:[self.telphoneText.text intValue]]];
     [contactDB setEmail:self.emailText.text];
-    [contactDB setFacebook:self.fbText.text];
+//    [contactDB setFacebook:self.fbText.text];
     [contactDB setTwitter:self.twitterText.text];
     
     NSError *error;

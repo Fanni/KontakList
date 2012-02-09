@@ -1,20 +1,19 @@
 //
-//  Contacts.m
+//  Telephone.m
 //  Contacts
 //
 //  Created by Fanni Ikhwan on 2/9/12.
 //  Copyright (c) 2012 Kiranatama. All rights reserved.
 //
 
-#import "Contacts.h"
 #import "Telephone.h"
+#import "Contacts.h"
 
 
-@implementation Contacts
+@implementation Telephone
 
-@dynamic email;
-@dynamic name;
-@dynamic twitter;
-@dynamic contactsToTelephone;
+@dynamic number;
+@dynamic type;
+@dynamic telephoneToContacts;
 
 @end
