@@ -12,6 +12,8 @@
 @synthesize homePhoneText;
 @synthesize officePhoneText;
 @synthesize handPhoneText;
+@synthesize phones;
+@synthesize phoneDelegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -32,20 +34,10 @@
 
 #pragma mark - View lifecycle
 
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
+    phones = [[NSMutableDictionary alloc] init];
 }
-*/
 
 - (void)viewDidUnload
 {
@@ -64,5 +56,12 @@
 }
 
 - (IBAction)savePhoneNumber:(id)sender {
+    
+    [phones setValue:homePhoneText.text forKey:@"Home Phone"];
+    [phones setValue:officePhoneText.text forKey:@"Office Phone"];
+    [phones setValue:handPhoneText.text forKey:@"Handphone"];
+     
+    [phoneDelegate saveThisPhoneNumber:phones];
+    
 }
 @end

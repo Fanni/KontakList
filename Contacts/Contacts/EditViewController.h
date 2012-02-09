@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Contacts.h"
+#import "PhoneViewController.h"
 
 @class EditViewController;
 @protocol EditDelegate <NSObject>
@@ -17,7 +18,7 @@
 
 @end
 
-@interface EditViewController : UITableViewController
+@interface EditViewController : UITableViewController<PhoneViewDelegate>
 
 @property (weak, nonatomic) id<EditDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UITextField *nameText;
@@ -27,6 +28,9 @@
 @property (strong, nonatomic) IBOutlet UITextField *twitterText;
 @property (strong, nonatomic) NSMutableArray *contactArray;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjContext;
+@property (strong, nonatomic) NSString *type;
+@property (assign, nonatomic) NSInteger number;
+@property (strong, nonatomic) PhoneViewController *phoneView;
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;

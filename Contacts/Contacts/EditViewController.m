@@ -7,6 +7,7 @@
 //
 
 #import "EditViewController.h"
+#import "Telephone.h"
 
 @class AppDelegate;
 @implementation EditViewController
@@ -18,6 +19,9 @@
 @synthesize delegate;
 @synthesize contactArray;
 @synthesize managedObjContext;
+@synthesize type;
+@synthesize number;
+@synthesize phoneView;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -118,7 +122,34 @@
     }
     
     [contactArray insertObject:contactDB atIndex:0];
+    
+    [[self delegate] EditViewControllerDidSaveWithData:contactDB];
 }
 
+#pragma mark - phone view delegate
+
+- (void)saveThisPhoneNumber:(NSDictionary *)phone{
+    
+    NSArray *typeNumber = [phone allKeys];
+    NSArray *telephoneNumber = [phone allValues];
+    int i;
+    for (i=0; i<3; i++) {
+        Telephone *telephone = (Telephone *)[NSEntityDescription insertNewObjectForEntityForName:@"Telephone" inManagedObjectContext:managedObjContext];
+        [telephone setNumber:[NSNumber numberWithInt:[[telephoneNumber objectAtIndex:i] intValue]]];
+        [telephone setType:[typeNumber objectAtIndex:i]];
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+#pragma mark - segue delegate
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"telephoneSegue"]) {
+        PhoneViewController *phone = segue.destinationViewController;
+        phone.phoneDelegate = self;
+    }
+}
 
 @end
