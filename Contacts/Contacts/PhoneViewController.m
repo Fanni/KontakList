@@ -64,4 +64,8 @@
     [phoneDelegate saveThisPhoneNumber:phones];
     
 }
+
+- (IBAction)abortSave:(id)sender {
+    [phoneDelegate abortSaveNumber];
+}
 @end

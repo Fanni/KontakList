@@ -143,6 +143,10 @@
     
 }
 
+- (void)abortSaveNumber{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark - segue delegate
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

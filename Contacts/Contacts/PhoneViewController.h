@@ -12,6 +12,7 @@
 @protocol PhoneViewDelegate <NSObject>
 
 - (void)saveThisPhoneNumber:(NSDictionary*)phone;
+- (void)abortSaveNumber;
 
 @end
 
@@ -23,5 +24,6 @@
 @property (weak, nonatomic) id<PhoneViewDelegate> phoneDelegate;
 
 - (IBAction)savePhoneNumber:(id)sender;
+- (IBAction)abortSave:(id)sender;
 
 @end
