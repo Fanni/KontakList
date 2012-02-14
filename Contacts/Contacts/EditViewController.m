@@ -109,7 +109,7 @@
     [contactDB setTwitter:self.twitterText.text];
     
     Telephone *telephone = (Telephone *)[NSEntityDescription insertNewObjectForEntityForName:@"Telephone" inManagedObjectContext:managedObjContext];
-    [cPhone addContactsToTelephoneObject:telephone];
+    [contactDB addContactsToTelephoneObject:telephone];
     [telephone setNumber:self.number];
     [telephone setType:self.type];
     

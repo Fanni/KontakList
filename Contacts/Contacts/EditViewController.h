@@ -27,7 +27,7 @@
 @property (strong, nonatomic) NSMutableArray *contactArray;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjContext;
 @property (strong, nonatomic) NSString *type;
-@property (assign, nonatomic) NSNumber *number;
+@property (strong, nonatomic) NSNumber *number;
 @property (strong, nonatomic) PhoneViewController *phoneView;
 @property (strong, nonatomic) Contacts *cPhone;
 @property (strong, nonatomic) IBOutlet UILabel *status;
