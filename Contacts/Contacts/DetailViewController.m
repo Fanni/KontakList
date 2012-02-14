@@ -14,7 +14,6 @@
 @synthesize manageObjectContext;
 @synthesize nameLabel;
 @synthesize numberLabel;
-@synthesize fbLabel;
 @synthesize emailLabel;
 @synthesize twitLabel;
 
@@ -48,7 +47,6 @@
 {
     [self setNameLabel:nil];
     [self setNumberLabel:nil];
-    [self setFbLabel:nil];
     [self setEmailLabel:nil];
     [self setTwitLabel:nil];
     [super viewDidUnload];
@@ -61,9 +59,7 @@
     [super viewWillAppear:animated];
     
     self.nameLabel.text = contactData.name;
-//    self.numberLabel.text = contactData.telphone.stringValue;
     self.emailLabel.text = contactData.email;
-//    self.fbLabel.text = contactData.facebook;
     self.twitLabel.text = contactData.twitter;
 }
 

@@ -12,9 +12,7 @@
 @class AppDelegate;
 @implementation EditViewController
 @synthesize nameText;
-@synthesize telphoneText;
 @synthesize emailText;
-@synthesize fbText;
 @synthesize twitterText;
 @synthesize delegate;
 @synthesize contactArray;
@@ -22,6 +20,8 @@
 @synthesize type;
 @synthesize number;
 @synthesize phoneView;
+@synthesize cPhone;
+@synthesize status;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -46,20 +46,15 @@
 {
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    status.text = @"not saved";
 }
 
 - (void)viewDidUnload
 {
     [self setNameText:nil];
-    [self setTelphoneText:nil];
     [self setEmailText:nil];
-    [self setFbText:nil];
     [self setTwitterText:nil];
+    [self setStatus:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -110,10 +105,13 @@
     NSLog(@"------------ %@",self.managedObjContext);
     Contacts *contactDB = (Contacts *)[NSEntityDescription insertNewObjectForEntityForName:@"Contacts" inManagedObjectContext:managedObjContext];
     [contactDB setName:self.nameText.text];
-//    [contactDB setTelphone:[NSNumber numberWithInt:[self.telphoneText.text intValue]]];
     [contactDB setEmail:self.emailText.text];
-//    [contactDB setFacebook:self.fbText.text];
     [contactDB setTwitter:self.twitterText.text];
+    
+    Telephone *telephone = (Telephone *)[NSEntityDescription insertNewObjectForEntityForName:@"Telephone" inManagedObjectContext:managedObjContext];
+    [cPhone addContactsToTelephoneObject:telephone];
+    [telephone setNumber:self.number];
+    [telephone setType:self.type];
     
     NSError *error;
     if (![managedObjContext save:&error]) {
@@ -128,22 +126,19 @@
 
 #pragma mark - phone view delegate
 
-- (void)saveThisPhoneNumber:(NSDictionary *)phone{
+- (void)saveThisPhoneNumber:(NSNumber*)phone withType:(NSString *)tipe{
     
-    NSArray *typeNumber = [phone allKeys];
-    NSArray *telephoneNumber = [phone allValues];
-    int i;
-    for (i=0; i<3; i++) {
-        Telephone *telephone = (Telephone *)[NSEntityDescription insertNewObjectForEntityForName:@"Telephone" inManagedObjectContext:managedObjContext];
-        [telephone setNumber:[NSNumber numberWithInt:[[telephoneNumber objectAtIndex:i] intValue]]];
-        [telephone setType:[typeNumber objectAtIndex:i]];
-    }
+    self.number = phone;
+    self.type = tipe;
+    self.status.text = @"saved";
     
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
 
 - (void)abortSaveNumber{
+    self.status.text = @"save canceled";
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -151,7 +146,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"telephoneSegue"]) {
-        PhoneViewController *phone = segue.destinationViewController;
+        UINavigationController *navigation = [segue destinationViewController];
+        PhoneViewController *phone = [[navigation viewControllers] objectAtIndex:0];
         phone.phoneDelegate = self;
     }
 }

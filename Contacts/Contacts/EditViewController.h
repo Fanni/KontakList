@@ -22,15 +22,15 @@
 
 @property (weak, nonatomic) id<EditDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UITextField *nameText;
-@property (strong, nonatomic) IBOutlet UITextField *telphoneText;
 @property (strong, nonatomic) IBOutlet UITextField *emailText;
-@property (strong, nonatomic) IBOutlet UITextField *fbText;
 @property (strong, nonatomic) IBOutlet UITextField *twitterText;
 @property (strong, nonatomic) NSMutableArray *contactArray;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjContext;
 @property (strong, nonatomic) NSString *type;
-@property (assign, nonatomic) NSInteger number;
+@property (assign, nonatomic) NSNumber *number;
 @property (strong, nonatomic) PhoneViewController *phoneView;
+@property (strong, nonatomic) Contacts *cPhone;
+@property (strong, nonatomic) IBOutlet UILabel *status;
 
 - (IBAction)cancel:(id)sender;
 - (IBAction)save:(id)sender;

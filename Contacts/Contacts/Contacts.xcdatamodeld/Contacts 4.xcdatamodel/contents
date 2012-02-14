@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="878" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Contacts" representedClassName="Contacts">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="twitter" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="contactsToTelephone" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Telephone" inverseName="telephoneToContacts" inverseEntity="Telephone" syncable="YES"/>
+        <relationship name="groupOfContact" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="Groups" inverseName="contactInGroup" inverseEntity="Groups" syncable="YES"/>
+    </entity>
+    <entity name="Groups" representedClassName="Groups" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="contactInGroup" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contacts" inverseName="groupOfContact" inverseEntity="Contacts" syncable="YES"/>
+    </entity>
+    <entity name="Telephone" representedClassName="Telephone" syncable="YES">
+        <attribute name="number" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="telephoneToContacts" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contacts" inverseName="contactsToTelephone" inverseEntity="Contacts" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Contacts" positionX="-72" positionY="306" width="128" height="105"/>
+        <element name="Telephone" positionX="160" positionY="192" width="128" height="90"/>
+        <element name="Groups" positionX="133" positionY="468" width="128" height="75"/>
+    </elements>
+</model>

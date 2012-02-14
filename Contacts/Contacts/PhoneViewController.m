@@ -9,11 +9,9 @@
 #import "PhoneViewController.h"
 
 @implementation PhoneViewController
-@synthesize homePhoneText;
-@synthesize officePhoneText;
-@synthesize handPhoneText;
-@synthesize phones;
 @synthesize phoneDelegate;
+@synthesize phoneNumber;
+@synthesize phoneType;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,19 +32,29 @@
 
 #pragma mark - View lifecycle
 
+- (void)viewDidAppear:(BOOL)animated{
+    NSLog(@"test");
+}
+
 - (void)viewDidLoad{
     [super viewDidLoad];
-    phones = [[NSMutableDictionary alloc] init];
 }
 
 - (void)viewDidUnload
 {
-    [self setHomePhoneText:nil];
-    [self setOfficePhoneText:nil];
-    [self setHandPhoneText:nil];
+    [self setPhoneNumber:nil];
+    [self setPhoneType:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -56,16 +64,41 @@
 }
 
 - (IBAction)savePhoneNumber:(id)sender {
-    
-    [phones setValue:homePhoneText.text forKey:@"Home Phone"];
-    [phones setValue:officePhoneText.text forKey:@"Office Phone"];
-    [phones setValue:handPhoneText.text forKey:@"Handphone"];
-     
-    [phoneDelegate saveThisPhoneNumber:phones];
-    
+    [[self phoneDelegate] saveThisPhoneNumber:[NSNumber numberWithInt:[phoneNumber.text intValue]] withType:type];
 }
 
-- (IBAction)abortSave:(id)sender {
-    [phoneDelegate abortSaveNumber];
+- (IBAction)cancelSaving:(id)sender {
+    [self.phoneDelegate abortSaveNumber];
 }
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 0) {
+        [self.phoneNumber becomeFirstResponder];
+    }
+}
+
+#pragma mark - Phone Type delegate
+
+- (void)savePhoneType:(NSString *)pt{
+    type = pt;
+    [self.phoneType setText:type];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)cancelSavingPhoneType{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - segue delegate
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"typeView"]) {
+        PhoneTypeViewController *phoneTipe = [segue destinationViewController];
+        phoneTipe.delegate = self;
+    }
+}
+
 @end

@@ -7,23 +7,24 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PhoneTypeViewController.h"
 
 @class PhoneViewController;
 @protocol PhoneViewDelegate <NSObject>
 
-- (void)saveThisPhoneNumber:(NSDictionary*)phone;
+- (void)saveThisPhoneNumber:(NSNumber*)phone withType:(NSString*)tipe;
 - (void)abortSaveNumber;
 
 @end
 
-@interface PhoneViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UITextField *homePhoneText;
-@property (strong, nonatomic) IBOutlet UITextField *officePhoneText;
-@property (strong, nonatomic) IBOutlet UITextField *handPhoneText;
-@property (strong, nonatomic) NSMutableDictionary* phones;
+@interface PhoneViewController : UITableViewController<PhoneTypeDelegate>{
+    NSString* type;
+}
 @property (weak, nonatomic) id<PhoneViewDelegate> phoneDelegate;
+@property (strong, nonatomic) IBOutlet UITextField *phoneNumber;
+@property (strong, nonatomic) IBOutlet UILabel *phoneType;
 
 - (IBAction)savePhoneNumber:(id)sender;
-- (IBAction)abortSave:(id)sender;
+- (IBAction)cancelSaving:(id)sender;
 
 @end

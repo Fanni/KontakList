@@ -1,19 +1,18 @@
 //
-//  Telephone.m
+//  Groups.m
 //  Contacts
 //
 //  Created by Fanni Ikhwan on 2/14/12.
 //  Copyright (c) 2012 Kiranatama. All rights reserved.
 //
 
-#import "Telephone.h"
+#import "Groups.h"
 #import "Contacts.h"
 
 
-@implementation Telephone
+@implementation Groups
 
-@dynamic number;
-@dynamic type;
-@dynamic telephoneToContacts;
+@dynamic name;
+@dynamic contactInGroup;
 
 @end
