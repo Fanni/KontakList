@@ -25,6 +25,7 @@
 		37CB8A0B14EA4C4F002EC02D /* Contacts.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CB8A0A14EA4C4F002EC02D /* Contacts.m */; };
 		37CB8A0E14EA4C50002EC02D /* Telephone.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CB8A0D14EA4C4F002EC02D /* Telephone.m */; };
 		37CB8A1114EA4C50002EC02D /* Groups.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CB8A1014EA4C50002EC02D /* Groups.m */; };
+		37CB8A1414EA5229002EC02D /* GroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37CB8A1314EA5229002EC02D /* GroupViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,8 @@
 		37CB8A0D14EA4C4F002EC02D /* Telephone.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Telephone.m; sourceTree = "<group>"; };
 		37CB8A0F14EA4C50002EC02D /* Groups.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Groups.h; sourceTree = "<group>"; };
 		37CB8A1014EA4C50002EC02D /* Groups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Groups.m; sourceTree = "<group>"; };
+		37CB8A1214EA5229002EC02D /* GroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupViewController.h; sourceTree = "<group>"; };
+		37CB8A1314EA5229002EC02D /* GroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupViewController.m; sourceTree = "<group>"; };
 		37EB31B114E37A2E007DB4A5 /* Contacts 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Contacts 2.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,6 +85,12 @@
 		371830E014E37C7E005B1277 /* CoreData Entities */ = {
 			isa = PBXGroup;
 			children = (
+				37CB8A0F14EA4C50002EC02D /* Groups.h */,
+				37CB8A1014EA4C50002EC02D /* Groups.m */,
+				37CB8A0C14EA4C4F002EC02D /* Telephone.h */,
+				37CB8A0D14EA4C4F002EC02D /* Telephone.m */,
+				37CB8A0914EA4C4F002EC02D /* Contacts.h */,
+				37CB8A0A14EA4C4F002EC02D /* Contacts.m */,
 			);
 			name = "CoreData Entities";
 			sourceTree = "<group>";
@@ -131,6 +140,8 @@
 				371830E314E380C4005B1277 /* PhoneViewController.m */,
 				37651EAF14EA18C9000105DE /* PhoneTypeViewController.h */,
 				37651EB014EA18C9000105DE /* PhoneTypeViewController.m */,
+				37CB8A1214EA5229002EC02D /* GroupViewController.h */,
+				37CB8A1314EA5229002EC02D /* GroupViewController.m */,
 				37A55BAF14DA48FF00D5D3D6 /* Supporting Files */,
 			);
 			path = Contacts;
@@ -141,12 +152,6 @@
 			children = (
 				371830E014E37C7E005B1277 /* CoreData Entities */,
 				37A55BBD14DA48FF00D5D3D6 /* Contacts.xcdatamodeld */,
-				37CB8A0F14EA4C50002EC02D /* Groups.h */,
-				37CB8A1014EA4C50002EC02D /* Groups.m */,
-				37CB8A0C14EA4C4F002EC02D /* Telephone.h */,
-				37CB8A0D14EA4C4F002EC02D /* Telephone.m */,
-				37CB8A0914EA4C4F002EC02D /* Contacts.h */,
-				37CB8A0A14EA4C4F002EC02D /* Contacts.m */,
 				37A55BBA14DA48FF00D5D3D6 /* MainStoryboard.storyboard */,
 				37A55BB014DA48FF00D5D3D6 /* Contacts-Info.plist */,
 				37A55BB114DA48FF00D5D3D6 /* InfoPlist.strings */,
@@ -231,6 +236,7 @@
 				37CB8A0B14EA4C4F002EC02D /* Contacts.m in Sources */,
 				37CB8A0E14EA4C50002EC02D /* Telephone.m in Sources */,
 				37CB8A1114EA4C50002EC02D /* Groups.m in Sources */,
+				37CB8A1414EA5229002EC02D /* GroupViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

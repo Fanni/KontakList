@@ -186,15 +186,15 @@
     if ([[segue identifier] isEqualToString:@"detailContact"])
     {
         DetailViewController *dvc = [segue destinationViewController];
-        
         dvc.manageObjectContext = managedObjectContext;
         NSInteger selectedIndex = [[self.tableView indexPathForSelectedRow] row];
         if (search) {
             dvc.contactData = [searchedContacts objectAtIndex:selectedIndex];
-            NSLog(@"ditap");
+            NSLog(@"ditap %@",[searchedContacts objectAtIndex:selectedIndex]);
         }else{
             dvc.contactData = [contacts objectAtIndex:selectedIndex];
-            NSLog(@"ditekan");
+            dvc.data = [NSMutableArray arrayWithObject:[contacts objectAtIndex:selectedIndex]];
+            NSLog(@"ditekan %@",dvc.data);
         }
     }
 }

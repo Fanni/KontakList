@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "EditViewController.h"
 #import "ContactsListViewController.h"
+#import "GroupViewController.h"
 
-@interface HomeViewController : UIViewController<EditDelegate, ContactListDelegate>
+@interface HomeViewController : UIViewController<EditDelegate, ContactListDelegate, GroupViewDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 

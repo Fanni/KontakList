@@ -52,12 +52,73 @@
                                     <segue destination="IS3-s4-mcQ" kind="modal" identifier="AddContact" id="OKU-O0-JXs"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="iZH-vX-41w">
+                                <rect key="frame" x="20" y="211" width="280" height="60"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="OriyaSangamMN-Bold" family="Oriya Sangam MN" pointSize="20"/>
+                                <state key="normal" title="Add Group">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="Xg0-Te-mdu" kind="modal" identifier="addGroup" id="vDc-re-Fgi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.25098040699958801" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="65" y="115"/>
+        </scene>
+        <scene sceneID="pEc-mb-XHD">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xCm-qN-JRD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Xg0-Te-mdu" customClass="GroupViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KuB-il-ohd">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Add Group" lineBreakMode="tailTruncation" minimumFontSize="10" id="qru-lP-tQJ">
+                                <rect key="frame" x="95" y="20" width="131" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Group Name" minimumFontSize="17" id="MMM-MD-idi">
+                                <rect key="frame" x="52" y="74" width="217" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Peb-5f-W0g">
+                                <rect key="frame" x="52" y="119" width="217" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveGroup:" destination="Xg0-Te-mdu" eventType="touchUpInside" id="NrV-Fk-Xqd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameText" destination="MMM-MD-idi" id="PCf-Lv-qVS"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="634" y="424"/>
         </scene>
         <scene sceneID="ext-1u-jNI">
             <objects>
@@ -447,19 +508,26 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Telphone Number" id="Hvp-7o-b3u">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="UvN-I6-suH">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="uD3-eS-7N8" detailTextLabel="HSf-OV-W1Y" style="IBUITableViewCellStyleValue1" id="UvN-I6-suH">
                                         <rect key="frame" x="0.0" y="138" width="320" height="46"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="10" y="1" width="300" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" minimumFontSize="10" id="17U-13-JlO">
-                                                    <rect key="frame" x="12" y="4" width="276" height="36"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uD3-eS-7N8">
+                                                    <rect key="frame" x="10" y="11" width="35" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HSf-OV-W1Y">
+                                                    <rect key="frame" x="246" y="11" width="44" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.2196078431372549" green="0.32941176470588235" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -526,7 +594,8 @@
                     <connections>
                         <outlet property="emailLabel" destination="ore-nh-USe" id="pot-SD-8Bp"/>
                         <outlet property="nameLabel" destination="ecy-yM-eau" id="iin-Vb-ceO"/>
-                        <outlet property="numberLabel" destination="17U-13-JlO" id="MVA-HI-gh4"/>
+                        <outlet property="phoneNumber" destination="HSf-OV-W1Y" id="Mk9-JY-xx9"/>
+                        <outlet property="phoneType" destination="uD3-eS-7N8" id="mZy-lr-PVG"/>
                         <outlet property="twitLabel" destination="0Od-if-yhQ" id="2fB-6k-YmH"/>
                     </connections>
                 </tableViewController>
@@ -603,6 +672,8 @@
                 <relationship kind="outlet" name="emailLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="nameLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="numberLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="phoneNumber" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="phoneType" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="twitLabel" candidateClass="UILabel"/>
             </relationships>
         </class>
@@ -615,6 +686,13 @@
                 <relationship kind="outlet" name="nameText" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="status" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="twitterText" candidateClass="UITextField"/>
+            </relationships>
+        </class>
+        <class className="GroupViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GroupViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="saveGroup:"/>
+                <relationship kind="outlet" name="nameText" candidateClass="UITextField"/>
             </relationships>
         </class>
         <class className="HomeViewController" superclassName="UIViewController">
@@ -643,6 +721,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="OKU-O0-JXs"/>
+        <segue reference="w6W-9c-DUH"/>
     </inferredMetricsTieBreakers>
 </document>

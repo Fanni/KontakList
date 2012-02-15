@@ -8,14 +8,17 @@
 
 #import "DetailViewController.h"
 #import "Contacts.h"
+#import "Telephone.h"
 
 @implementation DetailViewController
 @synthesize contactData;
 @synthesize manageObjectContext;
 @synthesize nameLabel;
-@synthesize numberLabel;
 @synthesize emailLabel;
 @synthesize twitLabel;
+@synthesize phoneType;
+@synthesize phoneNumber;
+@synthesize data;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -46,9 +49,10 @@
 - (void)viewDidUnload
 {
     [self setNameLabel:nil];
-    [self setNumberLabel:nil];
     [self setEmailLabel:nil];
     [self setTwitLabel:nil];
+    [self setPhoneType:nil];
+    [self setPhoneNumber:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -61,6 +65,12 @@
     self.nameLabel.text = contactData.name;
     self.emailLabel.text = contactData.email;
     self.twitLabel.text = contactData.twitter;
+    
+    for (NSManagedObject* number in self.data) {
+        NSManagedObject* phoneDetail = [number valueForKey:@"contactsToTelephone"];
+        self.phoneType.text = [[[phoneDetail valueForKey:@"type"] allObjects] objectAtIndex:0];
+        self.phoneNumber.text = [NSString stringWithFormat:@"%d",[[[phoneDetail valueForKey:@"number"] allObjects] objectAtIndex:0]];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated

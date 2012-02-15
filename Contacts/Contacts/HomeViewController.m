@@ -71,12 +71,22 @@
         ContactsListViewController *contactList = [[listNavigation viewControllers] objectAtIndex:0];
         contactList.managedObjectContext = [self managedObjectContext];
         contactList.delegate = self;
+    }else if ([segue.identifier isEqualToString:@"addGroup"]){
+        GroupViewController *groupView = segue.destinationViewController;
+        groupView.groupContext = [self managedObjectContext];
+        groupView.delegate = self;
     }
 }
 
 #pragma mark - Contact list delegate
 
 - (void)didCancel:(ContactsListViewController *)contactList{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Group view delegate
+
+- (void)saveGroup{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
