@@ -11,6 +11,7 @@
 @protocol GroupViewDelegate <NSObject>
 
 - (void)saveGroup;
+- (void)cancelAction;
 
 @end
 
@@ -21,5 +22,6 @@
 @property (weak, nonatomic) id<GroupViewDelegate> delegate;
 
 - (IBAction)saveGroup:(id)sender;
+- (IBAction)cancelAction:(id)sender;
 
 @end

@@ -50,7 +50,7 @@
 
 #pragma mark - edit/add contact delegate implementation
 
-- (void)EditViewControllerDidCancel:(EditViewController *)controller{
+- (void)EditViewControllerDidCancel:(SaveContactViewController *)controller{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -63,7 +63,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"AddContact"]) {
         UINavigationController *navigation = segue.destinationViewController;
-        EditViewController *editView = [[navigation viewControllers] objectAtIndex:0];
+        SaveContactViewController *editView = [[navigation viewControllers] objectAtIndex:0];
         editView.managedObjContext = [self managedObjectContext];
         editView.delegate = self;
     }else if ([segue.identifier isEqualToString:@"AllContacts"]){
@@ -87,6 +87,10 @@
 #pragma mark - Group view delegate
 
 - (void)saveGroup{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)cancelAction{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

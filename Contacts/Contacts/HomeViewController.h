@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EditViewController.h"
+#import "SaveContactViewController.h"
 #import "ContactsListViewController.h"
 #import "GroupViewController.h"
 

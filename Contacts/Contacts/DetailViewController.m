@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import "Contacts.h"
 #import "Telephone.h"
+#import "TelephoneNumberViewController.h"
 
 @implementation DetailViewController
 @synthesize contactData;
@@ -41,9 +42,7 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-
-    
+    [super viewDidLoad]; 
 }
 
 - (void)viewDidUnload
@@ -68,30 +67,32 @@
     
     for (NSManagedObject* number in self.data) {
         NSManagedObject* phoneDetail = [number valueForKey:@"contactsToTelephone"];
-        self.phoneType.text = [[[phoneDetail valueForKey:@"type"] allObjects] objectAtIndex:0];
-        self.phoneNumber.text = [NSString stringWithFormat:@"%d",[[[phoneDetail valueForKey:@"number"] allObjects] objectAtIndex:0]];
+        NSLog(@"phone detail %@",phoneDetail);
+        if ([[[phoneDetail valueForKey:@"type"] allObjects] count] == 0) {
+            self.phoneType.text = @"None";
+            self.phoneNumber.text = @"empty";
+        }else{
+            self.phoneType.text = [[[phoneDetail valueForKey:@"type"] allObjects] objectAtIndex:0];
+            self.phoneNumber.text = [NSString stringWithFormat:@"%d",[[[phoneDetail valueForKey:@"number"] allObjects] objectAtIndex:0]];
+        }
     }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"phoneDetail"]) {
+        TelephoneNumberViewController *telephone = [segue destinationViewController];
+        if (self.data == nil) {
+            [telephone setTelephoneData:[NSMutableArray arrayWithObjects:@"", nil]];
+        }else{
+            [telephone setTelephoneData:self.data];
+        }
+    }
 }
 
 @end

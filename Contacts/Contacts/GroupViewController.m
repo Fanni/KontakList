@@ -75,4 +75,8 @@
     [self.delegate saveGroup];
 }
 
+- (IBAction)cancelAction:(id)sender {
+    [self.delegate cancelAction];
+}
+
 @end

@@ -10,15 +10,15 @@
 #import "Contacts.h"
 #import "PhoneViewController.h"
 
-@class EditViewController;
+@class SaveContactViewController;
 @protocol EditDelegate <NSObject>
 
-- (void)EditViewControllerDidCancel:(EditViewController*)controller;
+- (void)EditViewControllerDidCancel:(SaveContactViewController*)controller;
 - (void)EditViewControllerDidSaveWithData:(Contacts*)data;
 
 @end
 
-@interface EditViewController : UITableViewController<PhoneViewDelegate>
+@interface SaveContactViewController : UITableViewController<PhoneViewDelegate>
 
 @property (weak, nonatomic) id<EditDelegate> delegate;
 @property (strong, nonatomic) IBOutlet UITextField *nameText;

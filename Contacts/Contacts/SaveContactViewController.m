@@ -6,11 +6,11 @@
 //  Copyright (c) 2012 Kiranatama. All rights reserved.
 //
 
-#import "EditViewController.h"
+#import "SaveContactViewController.h"
 #import "Telephone.h"
 
 @class AppDelegate;
-@implementation EditViewController
+@implementation SaveContactViewController
 @synthesize nameText;
 @synthesize emailText;
 @synthesize twitterText;
